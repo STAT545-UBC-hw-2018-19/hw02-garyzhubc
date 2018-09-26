@@ -3,7 +3,7 @@ title: "Hw02"
 output: github_document
 ---
 
-```{r setup}
+```{r, message=FALSE}
 require(gapminder)
 ```
 View head of the dataset
@@ -91,6 +91,7 @@ library(knitr)
 require(knitr)
 kable(filter(gapminder, country %in% c("Rwanda", "Afghanistan")))
 ```
+
 Exercise 7.3 frequency plot
 ```{r}
 ggplot(gapminder, mapping = aes(x = lifeExp,colour = continent)) + 
