@@ -78,13 +78,21 @@ gapminder %>%
   select(pop,year) %>% 
   ggplot(.,aes(year,pop)) + geom_line()
 ```
-Yes it does the job
+No, since
 ```{r}
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+This is different from
+```{r}
+filter(gapminder, country == "Rwanda")
 ```
 library(knitr)
 ```{r}
 require(knitr)
-kable(filter(gapminder, country == c("Rwanda", "Afghanistan")))
+kable(filter(gapminder, country %in% c("Rwanda", "Afghanistan")))
 ```
-
+Exercise 7.3 frequency plot
+```{r}
+ggplot(gapminder, mapping = aes(x = lifeExp,colour = continent)) + 
+  geom_freqpoly(binwidth = 5)
+```
