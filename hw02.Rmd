@@ -1,0 +1,90 @@
+---
+title: "Hw02"
+output: github_document
+---
+
+```{r setup}
+require(gapminder)
+```
+View head of the dataset
+```{r}
+head(gapminder)
+```
+
+It's a list
+```{r}
+typeof(gapminder)
+```
+It's a dataframe
+```{r}
+class(gapminder)
+```
+How many columns?
+```{r}
+ncol(gapminder)
+```
+How many rows?
+```{r}
+nrow(gapminder)
+```
+`nrow` and `ncol` are more informative when writing for loops
+```{r}
+dim(gapminder)
+```
+What are the types of the variables?
+```{r}
+str(gapminder)
+```
+Possible values
+```{r}
+unique(gapminder$continent)
+```
+Africa is typical and the distribution is as follows
+```{r}
+ftable(gapminder$continent)
+```
+Spread and five-number summary
+```{r}
+summary(gapminder$lifeExp)
+```
+70~75 is typical
+```{r}
+hist(gapminder$lifeExp)
+```
+Histogram of a quantitative variable
+```{r}
+require(ggplot2)
+plot <- ggplot(gapminder,aes(lifeExp))
+plot + geom_histogram()
+```
+Frequency boxplot of a categorical variable
+```{r}
+plot+geom_bar(aes(continent))
+```
+Plot 3 variables altogether
+```{r}
+plot <- ggplot(gapminder,aes(lifeExp,year))
+plot + geom_point(aes(size=pop))
+```
+A plot similar to above by multi-faceted 
+```{r}
+plot + geom_point(aes(size=pop)) + facet_wrap(~continent)
+```
+Pop into filter and select
+```{r}
+require(tidyverse)
+gapminder %>%
+  filter(country=="Afghanistan") %>% 
+  select(pop,year) %>% 
+  ggplot(.,aes(year,pop)) + geom_line()
+```
+Yes it does the job
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+library(knitr)
+```{r}
+require(knitr)
+kable(filter(gapminder, country == c("Rwanda", "Afghanistan")))
+```
+
